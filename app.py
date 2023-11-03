@@ -1,11 +1,9 @@
-# flask的项目
 from flask import Flask, render_template, request
 import psycopg2
 
 con = psycopg2.connect(database='medicine', user='postgres', password='201901033021', host='127.0.0.1', port=5432)
 
 app = Flask(__name__)
-
 
 """*****************************************************************************************************"""
 
@@ -37,9 +35,7 @@ def is_login():
     return render_template("login.html", text=text)  # 模板渲染
 
 
-
 """*****************************************************************************************************"""
-
 
 
 # 首页
@@ -48,11 +44,7 @@ def index():  # put application's code here
     return render_template("index.html")  # 模板渲染
 
 
-
-
 """*****************************************************************************************************"""
-
-
 
 
 # 信息查询(food_drug)
@@ -68,7 +60,7 @@ def food_drug_find():
         item_list = list(item)
         item_list[0] = num
         datalist.append(item_list)
-        num= num +1
+        num = num + 1
     cur.close()
     return render_template("food_drug_find.html", movies=datalist)
 
@@ -86,11 +78,12 @@ def success_find1():
     for item in data:
         item_list = list(item)
         item_list[0] = num
-        print(item_list)#test
+        print(item_list)  # test
         datalist.append(item_list)
         num = num + 1
     cur.close()
     return render_template("food_drug_find.html", movies=datalist)
+
 
 # 信息查询(health_food)
 @app.route('/health_food_find')
@@ -104,11 +97,12 @@ def health_food_find():
     for item in data:
         item_list = list(item)
         item_list[33] = num
-        print(item_list)#test
+        print(item_list)  # test
         datalist.append(item_list)
-        num=num+1
+        num = num + 1
     cur.close()
     return render_template("health_food_find.html", movies=datalist)
+
 
 # 查询成功（health_food)
 @app.route('/success_find2', methods=["POST"])
@@ -130,6 +124,7 @@ def success_find2():
     cur.close()
     return render_template("health_food_find.html", movies=datalist)
 
+
 # 信息查询(warehouse_content)
 @app.route('/content_find')
 def content_find():
@@ -147,6 +142,7 @@ def content_find():
         num = num + 1
     cur.close()
     return render_template("content_find.html", movies=datalist)
+
 
 # 查询成功（warehouse_content)
 @app.route('/success_find3', methods=["POST"])
@@ -169,7 +165,6 @@ def success_find3():
     return render_template("health_food_find.html", movies=datalist)
 
 
-
 """*****************************************************************************************************"""
 
 
@@ -177,6 +172,7 @@ def success_find3():
 @app.route('/message_add')
 def message_add():
     return render_template("message_add.html")
+
 
 # 保存成功
 @app.route("/saverecord", methods=["POST", "GET"])
@@ -191,7 +187,7 @@ def saveRecord():
             taboo = request.form["taboo"]
             address = request.form["address"]
             cur = con.cursor()
-            sql = "INSERT INTO public.food_drug(name, alias, loc, effect, taboo,  place)	VALUES('" +name + "','" + other_name + "','" + location + "','" + effect + "','" + taboo + "','" + address + "')"
+            sql = "INSERT INTO public.food_drug(name, alias, loc, effect, taboo,  place)	VALUES('" + name + "','" + other_name + "','" + location + "','" + effect + "','" + taboo + "','" + address + "')"
             cur.execute(sql)
             # (中药1,中药别称，肚子，可以治病，有一定毒性，江西)
             con.commit()
@@ -208,6 +204,7 @@ def saveRecord():
 def health_food_add():
     return render_template("health_food_add.html")
 
+
 # 保存成功
 @app.route("/health_food_saverecord", methods=["POST", "GET"])
 def health_saveRecord():
@@ -221,8 +218,8 @@ def health_saveRecord():
             people = request.form["people"]
             yongliang = request.form["yongliang"]
             cur = con.cursor()
-            sql="INSERT INTO public.health_food(id,foodname, approval_number, function, main_material, appropriate_crowd,  usage)	VALUES(1,'" + name + "','" + wenhao + "','" + effect + "','" + chengfen + "','" + people + "','" + yongliang + "')"
-            print(sql)#test
+            sql = "INSERT INTO public.health_food(id,foodname, approval_number, function, main_material, appropriate_crowd,  usage)	VALUES(1,'" + name + "','" + wenhao + "','" + effect + "','" + chengfen + "','" + people + "','" + yongliang + "')"
+            print(sql)  # test
             cur.execute(sql)
             con.commit()
             msg = "中成药信息添加成功"
@@ -238,6 +235,7 @@ def health_saveRecord():
 def content_add():
     return render_template("content_add.html")
 
+
 # 保存成功
 @app.route("/content_saverecord", methods=["POST", "GET"])
 def content_saveRecord():
@@ -252,7 +250,7 @@ def content_saveRecord():
             attention = request.form["attention"]
             cur = con.cursor()
             cur.execute(
-                "INSERT INTO public.food_drug(name, usage, product_specification, content,   matters_attention)	VALUES(" + name + "," + yongliang + "," + hanliang + "," + content + ","  + attention + ")")
+                "INSERT INTO public.food_drug(name, usage, product_specification, content,   matters_attention)	VALUES(" + name + "," + yongliang + "," + hanliang + "," + content + "," + attention + ")")
 
             con.commit()
             msg = "医药库存添加成功"
@@ -264,7 +262,6 @@ def content_saveRecord():
 
 
 """*****************************************************************************************************"""
-
 
 
 # 刪除药品信息（中药材）
@@ -293,8 +290,6 @@ def success_delect():
                                data2="The drug was not found in the medical information database!")
 
 
-
-
 # 刪除药品信息(中成药）
 @app.route('/health_food_message_delect')
 def health_food_message_delect():
@@ -321,13 +316,7 @@ def health_food_success_delect():
                                data2="The drug was not found in the medical information database!")
 
 
-
-
 """*****************************************************************************************************"""
-
-
-
-
 
 
 # wordcloud
