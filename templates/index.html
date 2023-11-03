@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>基于flask框架的医药信息管理平台</title>
+
+    <!-- 引入 layui.css -->
+    <link href="//unpkg.com/layui@2.8.0/dist/css/layui.css" rel="stylesheet">
+    <!-- 引入 layui.js -->
+    <script src="//unpkg.com/layui@2.8.0/dist/layui.js"></script>
+
+    <meta content="" name="descriptison">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="static/assets/img/favicon.png" rel="icon">
+    <link href="static/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i,900"
+          rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+    <link href="static/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="static/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="static/assets/vendor/venobox/venobox.css" rel="stylesheet">
+    <link href="static/assets/vendor/aos/aos.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="static/assets/css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<header id="header">
+    <div class="container">
+
+        <div class="logo float-left">
+            <h1 class="text-light"><a href="/"><span>Medicine</span></a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="temp.html"><img src="static/assets/img/logo.png" alt="" class="img-fluid"></a>-->
+        </div>
+
+        <nav class="nav-menu float-right d-none d-lg-block">
+            <ul class="layui-nav">
+                <li class="active"><a href="/index">首页 <i class="la la-angle-down"></i></a></li>
+                <li class="layui-nav-item">
+                    <a style="color: #5c768d">信息查询</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="food_drug_find">医药基本信息</a></dd>
+                        <dd><a href="health_food_find">中成药的信息</a></dd>
+                        <dd><a href="content_find">医药库存查询</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a style="color: #5c768d">添加药品</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="/message_add">基本信息添加</a></dd>
+                        <dd><a href="health_food_add">中成药的收录</a></dd>
+                        <!-- <dd><a href="content_add">医药库存录入</a></dd>-->
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a style="color: #5c768d">刪除药品</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="/message_delect">中药材信息删除</a></dd>
+                        <dd><a href="health_food_message_delect">中成药信息删除</a></dd>
+                    </dl>
+                </li>
+                <li><a href="/word">可视化报表(WordCloud)</a></li>
+                <li><a href="/echarts">可视化报表(Echarts)</a></li>
+                <li><a href="/ahp">医药AHP安全性评价算法</a></li>
+            </ul>
+        </nav><!-- .nav-menu -->
+
+    </div>
+</header><!-- End Header -->
+
+<!-- ======= 首页模块 ======= -->
+<section id="team" class="team">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>基于flask框架的医药信息管理平台</h2>
+            <p>应用Python爬虫,Flask框架、Echarts,WordCloud等技术实现,数据来源包括：<br>
+                Comparative Toxicogenomics Database、国家药品监督管理局、特殊药品信息查询平台等</p>
+        </div>
+        <!-- ======= 四个小方块 ======= -->
+        <section class="counts section-bg">
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-6 text-center" data-aos="fade-up">
+                        <a href="/index">
+                            <div class="count-box">
+                                <i class="icofont-simple-smile" style="color: #20b38e;"></i>
+                                <span data-toggle="counter-up">29</span>
+                                <p>分布地区</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 text-center" data-aos="fade-up" data-aos-delay="200">
+                        <a href="/index">
+                            <div class="count-box">
+                                <i class="icofont-document-folder" style="color: #c042ff;"></i>
+                                <span data-toggle="counter-up">426</span>
+                                <p>医药种类</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 text-center" data-aos="fade-up" data-aos-delay="400">
+                        <a href="/index">
+                            <div class="count-box">
+                                <i class="icofont-live-support" style="color: #46d1ff;"></i>
+                                <span data-toggle="counter-up">8</span>
+                                <p>爬取网站</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 text-center" data-aos="fade-up" data-aos-delay="600">
+                        <a href="/index">
+                            <div class="count-box">
+                                <i class="icofont-users-alt-5" style="color: #ffb459;"></i>
+                                <span data-toggle="counter-up">32</span>
+                                <p>安全性评价药物</p>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+        </section><!-- End Counts Section -->
+    </div>
+</section><!-- End Our Team Section -->
+
+
+<!-- ======= Footer ======= -->
+<footer id="footer">
+
+    <div class="container">
+        <div class="copyright">
+            &copy; Copyright <strong><span>注意</span></strong>. 版权所有：江西中医药大学计算机学院 联系人：揭圣
+        </div>
+
+    </div>
+</footer><!-- End Footer -->
+
+<a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+<!-- Vendor JS Files -->
+<script src="static/assets/vendor/jquery/jquery.min.js"></script>
+<script src="static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="static/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+<script src="static/assets/vendor/php-email-form/validate.js"></script>
+<script src="static/assets/vendor/jquery-sticky/jquery.sticky.js"></script>
+<script src="static/assets/vendor/venobox/venobox.min.js"></script>
+<script src="static/assets/vendor/waypoints/jquery.waypoints.min.js"></script>
+<script src="static/assets/vendor/counterup/counterup.min.js"></script>
+<script src="static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="static/assets/vendor/aos/aos.js"></script>
+
+<!-- Template Main JS File -->
+<script src="static/assets/js/main.js"></script>
+
+</body>
+
+</html>

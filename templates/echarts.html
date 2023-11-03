@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>基于flask框架的医药信息管理平台</title>
+
+    <!-- 引入刚刚下载的 ECharts 文件 -->
+    <script src="static/assets/js/echarts.js"></script>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <!-- 引入 layui.css -->
+    <link href="//unpkg.com/layui@2.8.0/dist/css/layui.css" rel="stylesheet">
+    <!-- 引入 layui.js -->
+    <script src="//unpkg.com/layui@2.8.0/dist/layui.js"></script>
+
+    <meta content="" name="descriptison">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="static/assets/img/favicon.png" rel="icon">
+    <link href="static/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i,900"
+          rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+    <link href="static/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="static/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="static/assets/vendor/venobox/venobox.css" rel="stylesheet">
+    <link href="static/assets/vendor/aos/aos.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="static/assets/css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<header id="header">
+    <div class="container">
+
+        <div class="logo float-left">
+            <h1 class="text-light"><a href="/"><span>Medicine</span></a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="temp.html"><img src="static/assets/img/logo.png" alt="" class="img-fluid"></a>-->
+        </div>
+
+        <nav class="nav-menu float-right d-none d-lg-block">
+            <ul class="layui-nav">
+                <li class="active"><a href="/index">首页 <i class="la la-angle-down"></i></a></li>
+                <li class="layui-nav-item">
+                    <a style="color: #5c768d">信息查询</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="food_drug_find">医药基本信息</a></dd>
+                        <dd><a href="health_food_find">中成药的信息</a></dd>
+                        <dd><a href="content_find">医药库存查询</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a style="color: #5c768d">添加药品</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="/message_add">基本信息添加</a></dd>
+                        <dd><a href="health_food_add">中成药的收录</a></dd>
+                        <!-- <dd><a href="content_add">医药库存录入</a></dd>-->
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a style="color: #5c768d">刪除药品</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="/message_delect">中药材信息删除</a></dd>
+                        <dd><a href="health_food_message_delect">中成药信息删除</a></dd>
+                    </dl>
+                </li>
+                <li><a href="/word">可视化报表(WordCloud)</a></li>
+                <li><a href="/echarts">可视化报表(Echarts)</a></li>
+                <li><a href="/ahp">医药AHP安全性评价算法</a></li>
+            </ul>
+        </nav><!-- .nav-menu -->
+
+    </div>
+</header><!-- End Header -->
+
+<!-- ======= 首页模块 ======= -->
+<section id="team" class="team">
+    <div class="container">
+
+        <div class="section-title">
+            <a href="https://mp.weixin.qq.com/s?__biz=MzU0MTcyMTA2NA==&mid=2247489645&idx=5&sn=fee4fbd80c2231b3c98950990f4a1f6f&chksm=fb24f0eacc5379fc8f34b947935627409e445e1cd83eab78348a3c63af30064f221a1950e038&scene=27"
+               target="_blank"><!--target="_blank"指的是点开超链接,弹出新的网页窗口,避免覆盖原网页-->
+                <h2>各省区中药材资源分布</h2><!--弹到后面词云图-->
+            </a>
+        </div>
+        <!-- ======= 四个小方块 ======= -->
+        <section class="counts section-bg">
+            <div class="container">
+
+                <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+                <div id="main" style="width: 100%;height:500px;"></div>
+
+
+            </div>
+        </section><!-- End Counts Section -->
+    </div>
+</section><!-- End Our Team Section -->
+
+
+<script type="text/javascript">
+    var dom = document.getElementById("main");
+    var myChart = echarts.init(dom);
+    var app = {};
+
+    var option;
+
+
+    option = {
+        xAxis: {
+            type: 'category',
+            data: ['黑龙江', '吉林', '辽宁', '内蒙古', '河北', '山东', '河南',
+                '安徽', '湖北', '山西', '浙江', '江苏', '陕西', '甘肃']
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [
+            {
+                data: [39, 27, 24, 22, 49, 55, 77, 54, 73, 38, 40, 43, 56, 22],
+                type: 'bar',
+                showBackground: true,
+                backgroundStyle: {
+                    color: 'rgba(180, 180, 180, 0.2)'
+                }
+            }
+        ]
+    };
+
+    if (option && typeof option === 'object') {
+        myChart.setOption(option);
+    }
+
+</script>
+
+
+<!-- ======= Footer ======= -->
+<footer id="footer">
+
+    <div class="container">
+        <div class="copyright">
+            &copy; Copyright <strong><span>注意</span></strong>. 版权所有：江西中医药大学计算机学院 联系人：揭圣
+        </div>
+
+    </div>
+</footer><!-- End Footer -->
+
+<a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+<!-- Vendor JS Files -->
+<script src="static/assets/vendor/jquery/jquery.min.js"></script>
+<script src="static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="static/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+<script src="static/assets/vendor/php-email-form/validate.js"></script>
+<script src="static/assets/vendor/jquery-sticky/jquery.sticky.js"></script>
+<script src="static/assets/vendor/venobox/venobox.min.js"></script>
+<script src="static/assets/vendor/waypoints/jquery.waypoints.min.js"></script>
+<script src="static/assets/vendor/counterup/counterup.min.js"></script>
+<script src="static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="static/assets/vendor/aos/aos.js"></script>
+
+<!-- Template Main JS File -->
+<script src="static/assets/js/main.js"></script>
+
+</body>
+
+</html>
